@@ -1,11 +1,11 @@
 import React from 'react';
-import { bool, string } from 'prop-types';
+import { bool, string, oneOfType, func, shape, object } from 'prop-types';
 import classNames from 'classnames';
 
 import BaseRadioButton from './BaseRadioButton';
 
 const RadioButton = props => {
-    const { className, inline, dark, ...rest } = props;
+    const { className, inline, dark, innerRef, ...rest } = props;
 
     return (
         <BaseRadioButton
@@ -15,6 +15,7 @@ const RadioButton = props => {
                 className,
             )}
             dark={dark}
+            ref={innerRef}
             {...rest}
         />
     );
@@ -23,6 +24,8 @@ const RadioButton = props => {
 RadioButton.propTypes = {
     /** Additional class names applied to the label */
     className: string,
+    /** Ref-setting function, or ref created by useRef, passed to the input element */
+    innerRef: oneOfType([func, shape({ current: object })]),
     /** Indicates whether the radio button is rendered inline or as a block */
     inline: bool,
     /** Dark variant */
